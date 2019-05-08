@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+
+<script>
+function clearSection()
+{
+	$("#someText").children().hide();
+}
+
+$(document).ready(function(){
+	clearSection();
+});
+
+$(function()
+{
+	$("button").click(function()
+		{
+			clearSection();
+			$(document.getElementById(event.target.getAttribute('href').slice(2,))).show();
+		}
+	)
+});
+
+</script>
+
+</head>
+<body>
+
+<div id = "someText">
+<p id="test1">This is a paragraph.</p>
+<p id="test2">This is another paragraph.</p>
+<p id="test3">Had enough?</p>
+</div>
+
+<button id="btntest1" href = "#!test1">Test1</button>
+<button id="btntest2" href = "#!test2" >Test2</button>
+<button id="btntest3" href = "#!test3">Test3</button>
+
+</body>
+</html>
