@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+
+* {
+  box-sizing: border-box;
+}
+
+.menu {
+   position: relative;
+   float: left;
+   width: 10%;
+   padding: 0px;
+   height: 40%; /* Should be removed. Only for demonstration */
+}
+
+.information {
+	position: relative;
+   float: right;
+   width: 75%;
+   padding: 0px;
+   height: 40%; /* Should be removed. Only for demonstration */
+}
+
+
+</style>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+
+<script>
+function clearSection()
+{
+	$("#someText").children().hide();
+}
+
+$(document).ready(function(){
+	clearSection();
+});
+
+$(function()
+{
+	$(".menu").click(function()
+		{
+			clearSection();
+			$(document.getElementById(event.target.getAttribute('href').slice(2,))).show();
+		}
+	)
+
+   $("#topTenData").click(function()
+      {
+   //       fetch('http://www.kymesonet.org/top.json')
+   //       .then(function(response)
+   //          {
+   //             return response.json();
+   //          })
+   //       .then(function(data)
+   //          {
+	// 			    console.log(data);
+   //          })
+   //       .catch(function(error)
+   //          {
+   //             console.log(error);
+   //          })
+   $.getJSON('http://www.kymesonet.org/top.json', function(data) {
+         console.log(data);
+   });
+})
+})
+
+</script>
+
+</head>
+<body>
+
+
+	<div  class = "menu">
+		<ul style="list-style-type:none">
+			<li id="btnDisplayOverview" href = "#!Overview">Overview</li>
+			<li id="btntest2" href = "#!test2" >Test2</li>
+			<li id="btntest3" href = "#!test3">Test3</li>
+		</ul>
+	</div>
+
+<div id = "someText" class = "information">
+	<p id="Overview">
+		The list-style-position property specifies the position of
+		the list-item markers ( bullet points). list-style-position: outside;
+		means that the bullet points will be outside the list item. The start
+		of each line of a ... Animatable: no. Read about animatable.
+	</p>
+	<p id="test2">This is another paragraph.</p>
+	<p id="test3">Had enough?</p>
+</div>
+
+<div id="topTenData">
+   <div class="w3-bar w3-black" style = "position: fixed; bottom: 60%">
+      <a  class="w3-bar-item w3-text">Top 10</a>
+      <a href="#!Rainfall" class="w3-bar-item w3-button">Rainfall</a>
+      <a href="#!Wind" class="w3-bar-item w3-button">Wind</a>
+      <a href="#!Temp" class="w3-bar-item w3-button">Temp</a>
+   </div>
+</div>
+</body>
+</html>
