@@ -4,22 +4,24 @@ const FinishTimes = {
     tooLate: 2001,
     finishedInTime: 1000
 }
-const timeToComplete = FinishTimes.tooLate;
+const timeToComplete = FinishTimes.finishedInTime;
  
-var p = new Promise((resolve, reject) => {
-    setTimeout(() => { reject('timeout') }, FinishTimes.timeout);
-    setTimeout(() => { resolve('complete') }, timeToComplete);
-})
+const getPromise = () => { 
+    return new Promise((resolve, reject) => {
+        setTimeout(() => { reject('timeout') }, FinishTimes.timeout);
+        setTimeout(() => { resolve('complete') }, timeToComplete);
+    })
+}
  
 const test = () => {
+    getPromise().then((res) => { console.log(res) })
+    .catch((res) => { console.log(res) });
     console.log('in test1')
-    p.then((res) => { console.log(res) })
-        .catch((res) => { console.log(res) });
 }
  
 async function test2() {
+    var x = await getPromise().catch((res) => console.log('it failed'))
     console.log('in test2')
-    var x = await p.catch((res) => console.log('it failed'))
     if (x !== undefined) {
         console.log('it completed')
     }
@@ -34,10 +36,14 @@ function start(counter) {
     }
 }
  
-console.log('before test called')
-start(0)
-test()
-test2()
-console.log('after test called')
+// console.log('before test called')
+// start(0)
+// test()
+// test2()
+// console.log('after test called')
  
-//exports = { test2 }
+module.exports = { 
+    start: start,
+    test: test, 
+    test2: test2 
+}
